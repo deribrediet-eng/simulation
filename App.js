@@ -36,7 +36,7 @@ const styles = stylesheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#574e6c',
+    backgroundColor: '#ffffff',
     alignItems: 'center',
     justifyContent: 'center',
   },
