@@ -1,66 +1,70 @@
-import {view, text , textInput, button ,stylesheet } from 'rect-native';
+import React from 'react';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 export default function App() {
 
-  function handlepress() {
-    console.log('add button Pressed');
+  function handlePress() {
+    console.log('Add button pressed');
   }
+
   return (
-    <view style={styles.container}>
-      <text style={styles.title}> My Tasks </text>
+    <View style={styles.container}>
+      <Text style={styles.title}> My Tasks </Text>
 
-      <view style={styles.divider}/>
-      
-      <view style={styles.inputContainer}>
-      <TextInput
-       placeholder= 'Add a new task...'/>
-       style={styles.inputtext}
-      <button
-       title='Add '
-        onPress={(handlepress) => {}}/>
-      </view>
+      <View style={styles.divider}/>
 
-      <veiw>
+      <View style={styles.inputContainer}>
+        <TextInput
+          placeholder='Add a new task...'
+          style={styles.inputText}
+        />
+        <Button
+          title='Add'
+          onPress={handlePress}
+        />
+      </View>
 
-        <text> Task 1 </text>
-        <text> Task 1 </text>
-        <text> Task 1 </text>
-
-      </veiw>
-    </view>
-  )
-
+      <View style={{ marginTop: 20 }}>
+        <Text> Task 1 </Text>
+        <Text> Task 2 </Text>
+        <Text> Task 3 </Text>
+      </View>
+    </View>
+  );
 }
 
-const styles = stylesheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
     backgroundColor: '#ffffff',
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 20
   },
   title: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
     color: '#151212'
   },
   divider: {
-    marginTop:20,
+    marginTop: 20,
     width: '80%',
     height: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#000000',
   },
   inputContainer: {
     flexDirection: 'row',
     marginTop: 20,
     width: '80%',
-    boarderwidth: 1,
-    borderColor: '#ffffff',
+    borderWidth: 1,
+    borderColor: '#000000',
     borderRadius: 5,
-
+    alignItems: 'center',
+    paddingHorizontal: 10
   },
-  inputtext: {
+  inputText: {
     flex: 1,
+    padding: 10
   }
-})
+});
