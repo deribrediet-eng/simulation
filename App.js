@@ -1,34 +1,44 @@
-import React from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
 export default function App() {
 
-  function handlePress() {
-    console.log('Add button pressed');
+  const [task, setTask] = useState('');
+  const [tasks, setTasks] = useState([]);
+
+  function addTask() {
+    if (task.trim() === '') return;
+
+    setTasks([...tasks, task]);
+    setTask('');
   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}> My Tasks </Text>
 
-      <View style={styles.divider}/>
+      <Text style={styles.header}>Daily Planner</Text>
 
-      <View style={styles.inputContainer}>
+      <View style={styles.inputSection}>
         <TextInput
-          placeholder='Add a new task...'
-          style={styles.inputText}
+          placeholder="Type your task..."
+          value={task}
+          onChangeText={setTask}
+          style={styles.input}
         />
-        <Button
-          title='Add'
-          onPress={handlePress}
-        />
+
+        <TouchableOpacity style={styles.addButton} onPress={addTask}>
+          <Text style={styles.buttonText}>Add</Text>
+        </TouchableOpacity>
       </View>
 
-      <View style={{ marginTop: 20 }}>
-        <Text> Task 1 </Text>
-        <Text> Task 2 </Text>
-        <Text> Task 3 </Text>
+      <View style={styles.taskList}>
+        {tasks.map((item, index) => (
+          <Text key={index} style={styles.taskItem}>
+            • {item}
+          </Text>
+        ))}
       </View>
+
     </View>
   );
 }
@@ -36,35 +46,49 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#917ac6',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20
+    backgroundColor: '#f4f6f8',
+    paddingTop: 60,
+    paddingHorizontal: 20,
   },
-  title: {
-    fontSize: 24,
+
+  header: {
+    fontSize: 28,
     fontWeight: 'bold',
-    color: '#100404'
+    marginBottom: 20,
   },
-  divider: {
-    marginTop: 20,
-    width: '80%',
-    height: 1,
-    backgroundColor: '#4a4646',
-  },
-  inputContainer: {
+
+  inputSection: {
     flexDirection: 'row',
-    marginTop: 20,
-    width: '80%',
-    borderWidth: 1,
-    borderColor: '#313929',
-    borderRadius: 5,
-    alignItems: 'center',
-    paddingHorizontal: 10
+    marginBottom: 20,
   },
-  inputText: {
+
+  input: {
     flex: 1,
-    padding: 10
-  }
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 10,
+  },
+
+  addButton: {
+    backgroundColor: '#007bff',
+    paddingHorizontal: 15,
+    justifyContent: 'center',
+    marginLeft: 10,
+    borderRadius: 8,
+  },
+
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+
+  taskList: {
+    marginTop: 10,
+  },
+
+  taskItem: {
+    fontSize: 16,
+    marginBottom: 8,
+  },
 });
